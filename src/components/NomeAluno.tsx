@@ -5,7 +5,7 @@ type NomeAlunoProps = {
 export default function NomeAluno({ nome }: NomeAlunoProps) {
   return (
     <div>
-      Aluno: {nome}
+      Aluno: <span className='text-cyan-500'>{nome}</span>
     </div>
   );
 }

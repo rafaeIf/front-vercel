@@ -1,5 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { listaProdutos } from "../../components/listaProdutos"
+import Menu from "../../components/Menu"
+import Footer from "../../components/Footer"
 
 export default function EditarProdutos() {
 
@@ -18,9 +20,11 @@ export default function EditarProdutos() {
     }
     return(
         <main>
-            <h1>Editando o Produto</h1>
-            <p>Editando os dados do produto: {produto.nome}</p>
-            <button onClick={salvar}>Salvar</button>
+            <Menu/>
+            <h1 className="text-center font-semibold mt-5 text-2xl uppercase">Editando o Produto</h1>
+            <p className="font-medium text-gray-700 ml-5">Editando os dados do produto: <span className='text-cyan-500'>{produto.nome}</span></p>
+            <button className="p-5 bg-[#ed145b] bd-5 m-5 text-white font-semibold rounded-xl" onClick={salvar}>Salvar</button>
+            <Footer/>
         </main>
     )
 }
