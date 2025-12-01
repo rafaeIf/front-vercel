@@ -2,14 +2,28 @@ import NomeAluno from '../../components/NomeAluno'
 import Logo from "../../assets/Fiap-logo-novo.jpg"
 import Menu from '../../components/Menu'
 import Footer from '../../components/Footer'
+import {useForm} from 'react-hook-form'
+
+type FormType = {
+  nome: string;
+  numero:number;
+};
 
 export default function Home() {
+
+    const { register, handleSubmit, setValue} = useForm<FormType>();
+
+    const onSubmit = (data: FormType) => {
+    console.log("Dados enviados:", data);
+    alert("Enviado!");
+  };
 
     const campus = 'Paulista'
     const curso = 'IA'
     const aluno = 'João'
 
     return(
+        
         <main>
             <Menu/>
             <h1 className='text-center font-semibold mt-5 text-2xl'>TDS FIAP - HOME</h1>
@@ -19,6 +33,33 @@ export default function Home() {
                 <p>Curso: <span className='text-cyan-500'>{curso}</span></p>
                 <NomeAluno nome={aluno}/>
             </div>
+
+            <form onSubmit={handleSubmit(onSubmit)} action="">
+                <fieldset>
+                    <p>Digite seu nome:</p>
+                    <input 
+                    type="text"
+                    {...register("nome", {
+                    required: "Informe o nome!",
+                    minLength: { value: 2, message: "Mínimo 2 caracteres" }
+                    })}
+                    />
+
+                    <p>Digite um número:</p>
+                    <input 
+                    type="number"
+                    {...register("numero", {
+                    valueAsNumber: true,
+                    required: "Informe o numero!",
+                    min: { value: 0, message: "Não pode ser negativo" }
+                    })}
+                    />
+
+                    <button type="submit">Enviar</button>
+                    </fieldset>
+            </form>
+            
+            
             <Footer/>
         </main>
     )
